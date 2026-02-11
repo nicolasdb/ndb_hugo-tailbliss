@@ -326,16 +326,107 @@ Colors have *meaning*. They represent the knowledge system, not generic UI.
 - Top row: Name (Literata 15px, 500) + Location (Hanken Grotesk 13px, text-tertiary) left, links (Commit Mono 12px, text-tertiary) right
 - Trust line: Commit Mono 11px, frontier color — "Patterns are extracted from documented work, not self-assessment. Confidence reflects evidence density. Built with Hugo, powered by curiosity."
 
-### Pages: Not Yet Designed
+### Pages Status
 
 | Page | Content | Status |
 |---|---|---|
 | `/posts/` | Full post archive, tags, search | Structure defined, not prototyped |
-| `/posts/{slug}` | Single post, evidence trail | Not prototyped |
-| `/patterns/` | Full patterns gallery | Structure defined, not prototyped |
+| `/posts/{slug}` | Single post with evidence trail | **Prototyped** |
+| `/patterns/` | Full patterns gallery | Not prototyped |
 | `/patterns/{slug}` | Single pattern detail, pearl list | Not prototyped |
 | `/timeline/` | Full interactive timeline | Not prototyped |
 | `/about/` | Profile + link to patterns | Not prototyped |
+
+### Page: Single Post (`/posts/{slug}`)
+
+**Structure:** Reading-first, narrower than homepage. Evidence trail collapsed by default.
+
+```
+┌─────────────────────────────────────────┐
+│ Nav (same as homepage, 920px)            │
+├───────────────────────────────┐         │
+│ ← Posts                       │ 700px   │
+│                               │         │
+│ Title (Literata 34px)         │         │
+│ date · read time · pearls ·   │         │
+│ timespan                      │         │
+│ [tag] [tag] [tag]             │         │
+│                               │         │
+│ Article body (Literata 17px)  │         │
+│ ...                           │         │
+│                               │         │
+│ ─────────────                 │         │
+│ ▾ Evidence trail (collapsed)  │         │
+│                               │         │
+│ Connected patterns            │         │
+│ [card]  [card]                │         │
+│                               │         │
+│ ─────────────                 │         │
+│ ← Previous    Next →          │         │
+├───────────────────────────────┘         │
+│ Footer (same as homepage, 920px)         │
+└─────────────────────────────────────────┘
+```
+
+**Content max-width: 700px** (narrower than homepage's 920px). Long-form reading needs a tighter measure. Nav and footer remain at 920px.
+
+#### Component: Article Header
+
+- Back link: "← Posts" — Commit Mono 12px, text-tertiary
+- Title: Literata 34px, weight 700, letter-spacing -0.02em, max 22ch
+- Meta row: Commit Mono 12px, text-tertiary, flex wrap
+  - Format: `{date} · {readTime} · {pearlCount} pearls · {timespan}`
+  - Pearl count in `--convergence` color
+  - Timespan: "March 2024 → January 2025" — shows duration of learning, not just publication date
+- Tags: pills — Commit Mono 11px, text-secondary, elevated bg, border, radius 2px
+
+#### Component: Article Body
+
+- **Font: Literata 17px, line-height 1.8, letter-spacing 0.005em** — reading font at optimal size. Optical sizing activates here.
+- Paragraph spacing: 20px margin-bottom
+- **H2: Hanken Grotesk 16px, weight 600** — sans-serif within serif body. Creates rhythm: serif = narrative, sans = structure. 36px margin-top, 14px margin-bottom.
+- **Blockquote:** Literata italic, `--convergence` 3px left border, 20px left padding
+- **Inline code:** Commit Mono 0.9em, code-bg background, 2px 6px padding, radius 2px
+- **Code blocks:** Commit Mono 14px, recessed background, border, 16px padding, full width
+- **Images:** full 700px width, caption in Commit Mono 11px below
+
+| Element | Font | Size | Weight | Notes |
+|---|---|---|---|---|
+| Body text | Literata | 17px | 400 | line-height 1.8, letter-spacing 0.005em |
+| H2 | Hanken Grotesk | 16px | 600 | Sans-serif for structural markers |
+| Blockquote | Literata | 17px | 400 italic | Convergence left border |
+| Inline code | Commit Mono | 0.9em | 400 | Background pill |
+| Code block | Commit Mono | 14px | 400 | Full-width recessed box |
+| Caption | Commit Mono | 11px | 400 | Below images |
+
+#### Component: Evidence Trail (collapsible)
+
+- **Collapsed by default.** Progressive disclosure: article stands alone. Curious visitors expand.
+- Toggle: "EVIDENCE TRAIL" label + `{pearlCount} pearls · {timespan}` (convergence) + chevron ▾
+- Intro text (expanded): Hanken Grotesk 13px, text-tertiary — "The pearls that built this post, in chronological order. Each is a timestamped note captured during the learning process — raw, unedited, as it happened."
+- Container: `--timeline-bg` background, border, radius 3px, 20px padding
+- Spine: same visual language as homepage timeline (1px, colored dots)
+- Per pearl:
+  - Dot (5px): `--fresh` (new insight), `--convergence` (connection made), `--pearl` (raw capture)
+  - Date: Commit Mono 11px, `--temporal`
+  - Content: Hanken Grotesk 13px, text-secondary, line-height 1.55
+- Spacing: 14px between pearls
+- Order: **chronological (oldest first)** — opposite of homepage timeline. Here the narrative builds forward.
+
+#### Component: Connected Patterns
+
+- Section label: "CONNECTED PATTERNS"
+- Horizontal flex of pattern cards (elevated bg, border, radius 3px)
+  - Title: Literata 15px, weight 700
+  - Confidence bar: label + 3px bar + percentage (same as homepage)
+- Links to `/patterns/{slug}`
+
+#### Component: Post Navigation
+
+- Divider: 1px `--border`
+- Two columns: previous (left) / next (right), max 45% width
+- Label: "← Previous" / "Next →" — Commit Mono 11px, text-tertiary
+- Title: Literata 14px, weight 500, text-secondary
 
 ---
 
@@ -653,6 +744,13 @@ Summarized from UX specification. These constrain all future decisions.
 | 2026-02-10 | "Continue" as universal entry label | Works for first connection (proceed to workspace) and return visits (resume). No overthinking. |
 | 2026-02-10 | Login = inline form on Continue click | Not a separate page. Single-user local auth. Registration via CLI/first-run. |
 | 2026-02-10 | Lobby background: surface-recessed | Darker than workshop surface. Visual threshold between layers. |
+| 2026-02-10 | Post body: Literata 17px, line-height 1.8 | Reading font at optimal size. Optical sizing activates. Generous leading for sustained reading. |
+| 2026-02-10 | Post H2: Hanken Grotesk (sans) within Literata (serif) body | Serif = narrative, sans = structure. Creates typographic rhythm within article. |
+| 2026-02-10 | Post content max-width: 700px | Narrower than homepage (920px). Long-form reading needs tighter measure. Nav/footer stay at 920px. |
+| 2026-02-10 | Evidence trail: collapsed by default | Progressive disclosure. Article stands alone. Curious visitors expand to see raw pearls. |
+| 2026-02-10 | Evidence trail order: chronological (oldest first) | Opposite of homepage timeline (recent first). Post evidence builds forward as narrative. |
+| 2026-02-10 | Post meta includes timespan | "March 2024 → January 2025" shows duration of learning, not just publication date. Unique differentiator. |
+| 2026-02-10 | Blockquote: convergence left border | 3px amber accent, Literata italic. Visually distinct from body without heavy decoration. |
 
 ---
 
@@ -660,12 +758,14 @@ Summarized from UX specification. These constrain all future decisions.
 
 | # | Question | Context | Priority |
 |---|---|---|---|
-| 1 | Portfolio inner pages | Posts detail, Patterns gallery, full Timeline, About — layout TBD. | Phase 0 — NEXT |
+| 1 | Remaining portfolio pages | Patterns gallery, full Timeline, About — layout TBD. Posts archive (list/filter). | Phase 0 |
 | 2 | Temporal force-directed graph: library or custom? | D3-force with time axis vs. fully custom Canvas renderer. Affects styling control. | Phase 0-1 |
 | 3 | Freshness: build-time vs. live fetch? | Hugo static = shows "at build time". Client-side fetch = live but adds dependency. | Phase 0 |
 | 4 | Compose mode: inline editor vs. export-only? | Phase 0 spec says export-based. Prototype shows inline editor. Clarify scope. | Phase 0 |
 | 5 | Mobile/responsive behavior | Portfolio needs responsive. BackOffice is desktop-only. Portfolio breakpoints? | Phase 0 |
-| 6 | Graph manipulation tools | Pan, zoom, select, highlight. D3 built-ins or custom controls? | Phase 1 |
-| 7 | Mermaid rendering in Compose mode | Mermaid pearls should render visually in compose editor. Integration approach? | Phase 1 |
-| 8 | Training gauge location | Spec says "quiet, in context bar". Does it go in context bar or Options? | Phase 1 |
-| 9 | Fog of war timing | When to introduce frontier mapping. Spec says 500+ pearls. Verify threshold. | Phase 2 |
+| 6 | Post page: code block styling | Full code blocks not yet prototyped. Syntax highlighting? Language label? Copy button? | Phase 0 |
+| 7 | Post page: image handling | Full-width images, captions, lightbox? Or keep simple (img + caption)? | Phase 0 |
+| 8 | Graph manipulation tools | Pan, zoom, select, highlight. D3 built-ins or custom controls? | Phase 1 |
+| 9 | Mermaid rendering in Compose mode | Mermaid pearls should render visually in compose editor. Integration approach? | Phase 1 |
+| 10 | Training gauge location | Spec says "quiet, in context bar". Does it go in context bar or Options? | Phase 1 |
+| 11 | Fog of war timing | When to introduce frontier mapping. Spec says 500+ pearls. Verify threshold. | Phase 2 |
