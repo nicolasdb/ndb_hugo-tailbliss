@@ -51,7 +51,7 @@ story_location: _bmad-output/implementation-artifacts
 development_status:
   # Foundation: Architecture & Planning
   phase-0-foundation: in-progress
-  0-0-architecture-doc: in-progress  # Creating now from 2026-02-11 decisions
+  0-0-architecture-doc: done          # Completed 2026-02-11
   0-0-phase-0-epic: backlog           # Next: run create-epics-and-stories
 
   # Phase 0: Portfolio UI Implementation (to be broken into stories by epic workflow)
