@@ -43,7 +43,7 @@ development_status:
   # Epic 1: Design Foundation, Clean Slate & Deploy Pipeline
   epic-1: in-progress
   1-1-remove-tailbliss-defaults-sample-content: done
-  1-2-implement-design-tokens-css-pipeline: ready-for-dev
+  1-2-implement-design-tokens-css-pipeline: done
   1-3-simplify-dark-mode-to-os-preference-only: backlog
   1-4-deploy-to-netlify-verify-pipeline: backlog
   epic-1-retrospective: optional

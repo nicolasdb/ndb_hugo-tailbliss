@@ -1,3 +1,7 @@
+/* 1. Design tokens FIRST — CSS custom properties must exist before Tailwind references them */
+@import "./design-tokens.css";
+
+/* 2. TailwindCSS */
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -118,7 +122,25 @@ img[loading="lazy"] {
     
     /* Custom classes */
     "prose-2xl";
-  
+
+  /* ── Design token semantic mappings ────────────────────── */
+  /* Map design tokens (from assets/css/design-tokens.css)    */
+  /* to Tailwind-compatible color names.                      */
+  /* Epic 2+ templates use these: bg-pattern, text-fresh, etc */
+  --color-pattern: var(--pattern);
+  --color-convergence: var(--convergence);
+  --color-fresh: var(--fresh);
+  --color-temporal: var(--temporal);
+  --color-frontier: var(--frontier);
+  --color-pearl: var(--pearl);
+
+  /* ── TailBliss legacy colors (backward compatibility) ──── */
+  /* Retained intentionally: existing templates still use     */
+  /* text-indigo-600, bg-primary, etc. Gradual migration to   */
+  /* semantic tokens (text-pattern, bg-fresh) happens in      */
+  /* Epic 2 as templates are rebuilt. Do NOT remove until all  */
+  /* template references are migrated.                        */
+
   /* Primary Colors - Indigo with OKLCH */
   --color-primary: oklch(58.5% .233 277.117);
   --color-primary-50: oklch(96.2% .018 272.314);
