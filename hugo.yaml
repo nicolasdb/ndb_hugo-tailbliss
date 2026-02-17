@@ -8,8 +8,6 @@ enableRobotsTXT: true
 canonifyURLs: false
 pagination:
   pagerSize: 9
-darkmode_js:
-  - assets/js/darkmode.js
 enableInlineShortcodes: true
 
 markup:
@@ -52,7 +50,7 @@ params:
   og_image: ""
   moto: "Portfolio & Skills Repository"
   description: "Personal portfolio showcasing projects, skills, and growth journey."
-  disable_theme_toggle: false
+  disable_theme_toggle: true
   newsletter_signup: false
 
   p1:

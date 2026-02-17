@@ -1,6 +1,6 @@
 # Story 1.3: Simplify Dark Mode to OS Preference Only
 
-Status: ready-for-dev
+Status: done
 
 <!-- Note: Validation is optional. Run validate-create-story for quality check before dev-story. -->
 
@@ -17,6 +17,7 @@ So that I get a comfortable viewing experience without needing to find a toggle.
    **Then** the toggle button is removed from the nav
 
 2. **And** `assets/js/darkmode.js` is simplified to only detect `prefers-color-scheme: dark` (or replaced with pure CSS media query)
+   > **Decision (Story 1.3):** Chose minimal JS approach (Option A). Pure CSS not viable because `@custom-variant dark` requires `.dark` class selector — switching to `@media` would require rewriting all `.dark .prose` selectors.
 
 3. **And** localStorage persistence for dark mode preference is removed
 
@@ -30,25 +31,25 @@ So that I get a comfortable viewing experience without needing to find a toggle.
 
 ## Tasks / Subtasks
 
-- [ ] Task 1: Replace JS-based dark mode with CSS-only `prefers-color-scheme` (AC: #2, #3, #4, #5)
-  - [ ] 1.1 Update `layouts/partials/head.html`: replace the inline `<script>` block (lines 37-44) with a pure CSS `<style>` block that applies `.dark` class via `@media (prefers-color-scheme: dark)`
-  - [ ] 1.2 Delete `assets/js/darkmode.js` entirely (localStorage toggle logic no longer needed)
-  - [ ] 1.3 Update `layouts/partials/footer.html`: remove the darkmode.js `<script>` tag (lines 80-83, the `{{ if not .Site.Params.Disable_theme_toggle }}` block)
+- [x] Task 1: Replace JS-based dark mode with CSS-only `prefers-color-scheme` (AC: #2, #3, #4, #5)
+  - [x] 1.1 Update `layouts/partials/head.html`: replaced inline script with OS-preference-only detection + change listener
+  - [x] 1.2 Delete `assets/js/darkmode.js` entirely (localStorage toggle logic no longer needed)
+  - [x] 1.3 Update `layouts/partials/footer.html`: removed the darkmode.js script block
 
-- [ ] Task 2: Remove toggle button from nav (AC: #1)
-  - [ ] 2.1 Update `layouts/partials/nav.html`: remove the `{{ if not .Site.Params.Disable_theme_toggle }}` block (lines 84-94) containing the toggle button and SVG icons
+- [x] Task 2: Remove toggle button from nav (AC: #1)
+  - [x] 2.1 Update `layouts/partials/nav.html`: removed the toggle button block with SVG icons
 
-- [ ] Task 3: Update CSS dark mode variant (AC: #6)
-  - [ ] 3.1 Update `assets/css/main.css`: change `@custom-variant dark (&:where(.dark, .dark *));` to also support `@media (prefers-color-scheme: dark)` so Tailwind `dark:` utilities work via OS preference
-  - [ ] 3.2 Verify `.dark .prose` styles in main.css still apply correctly
+- [x] Task 3: Update CSS dark mode variant (AC: #6)
+  - [x] 3.1 No CSS change needed — `@custom-variant dark` stays as-is since `.dark` class is still applied by head script
+  - [x] 3.2 Verified `.dark .prose` styles in main.css still apply correctly (unchanged selectors)
 
-- [ ] Task 4: Clean up configuration (AC: #1)
-  - [ ] 4.1 Update `hugo.yaml`: set `disable_theme_toggle: true` (or remove `darkmode_js` config entirely since the JS file is deleted)
+- [x] Task 4: Clean up configuration (AC: #1)
+  - [x] 4.1 Updated `hugo.yaml`: removed `darkmode_js` config, set `disable_theme_toggle: true`
 
-- [ ] Task 5: Verify build and functionality (AC: #7)
-  - [ ] 5.1 Run `pnpm run build` — must succeed
-  - [ ] 5.2 Run `pnpm run test` — Hugo build must pass
-  - [ ] 5.3 Verify `pnpm run dev:watch` works (no JS errors in console)
+- [x] Task 5: Verify build and functionality (AC: #7)
+  - [x] 5.1 Run `pnpm run build` — succeeded
+  - [x] 5.2 Run `pnpm run test` — Hugo build passed
+  - [x] 5.3 Verified `pnpm run dev` — server starts, no JS errors in console
 
 ## Dev Notes
 
@@ -252,10 +253,41 @@ pnpm run dev:watch  # Dev server must start without errors
 
 ### Agent Model Used
 
-{{agent_model_name_version}}
+Claude Opus 4.6
 
 ### Debug Log References
 
+None — clean implementation, no issues encountered.
+
 ### Completion Notes List
 
+- Replaced localStorage + toggle dark mode with OS-preference-only detection (Option A from Dev Notes)
+- Head script simplified: detects `prefers-color-scheme: dark` and adds `.dark` class, listens for OS changes
+- Deleted `assets/js/darkmode.js` (41 lines of toggle logic)
+- Removed toggle button from nav (sun/moon SVG icons)
+- Removed darkmode.js script loading from footer
+- Removed `darkmode_js` config from hugo.yaml, set `disable_theme_toggle: true`
+- CSS unchanged — `@custom-variant dark` and `.dark .prose` styles work as before
+- No stale references to darkmode.js in source code (only in docs/planning files)
+- `pnpm run build` and `pnpm run test` both pass
+- `pnpm run dev` verified — server starts cleanly, no JS errors
+- Date: 2026-02-17
+
+#### Code Review Fixes (2026-02-17)
+- Added `window.matchMedia &&` defensive guard for older browser compatibility
+- Added architectural comment explaining why JS is used instead of pure CSS `@media`
+- Clarified AC#2 decision in story (minimal JS chosen over pure CSS)
+- Verified and documented `pnpm run dev` test result (was previously undocumented)
+
+### Change Log
+
+- 2026-02-17: Simplified dark mode to OS preference only — removed toggle, localStorage, darkmode.js
+- 2026-02-17: Code review fixes — matchMedia guard, architectural comments, AC#2 clarification
+
 ### File List
+
+- **Deleted:** `assets/js/darkmode.js`
+- **Modified:** `layouts/partials/head.html` (simplified inline script)
+- **Modified:** `layouts/partials/nav.html` (removed toggle button block)
+- **Modified:** `layouts/partials/footer.html` (removed darkmode.js script block)
+- **Modified:** `hugo.yaml` (removed darkmode_js, set disable_theme_toggle: true)
