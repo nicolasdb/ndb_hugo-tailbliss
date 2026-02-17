@@ -36,23 +36,23 @@ So that the full build/deploy pipeline is proven and I can deploy incrementally 
   - [x] 1.3 Update all context commands (production, split1, deploy-preview, branch-deploy) to use `pnpm run build` or appropriate variant
   - [x] 1.4 Verify `publish = "public"` is still correct (Hugo outputs to `public/`)
 
-- [ ] Task 2: Connect GitHub repo to Netlify (AC: #1, #5) **MANUAL — user action required**
-  - [ ] 2.1 This is a manual step — user connects repo in Netlify dashboard
-  - [ ] 2.2 Verify auto-deploy is enabled for `main` branch
-  - [ ] 2.3 Document the Netlify site URL once created
+- [x] Task 2: Connect GitHub repo to Netlify (AC: #1, #5) **MANUAL — user action required**
+  - [x] 2.1 This is a manual step — user connects repo in Netlify dashboard
+  - [x] 2.2 Verify auto-deploy is enabled for `main` branch
+  - [x] 2.3 Document the Netlify site URL once created
 
-- [ ] Task 3: Verify deployed site (AC: #3, #4, #6) **MANUAL — requires live site**
-  - [ ] 3.1 Check deployed URL loads without errors
-  - [ ] 3.2 Open DevTools → Console → no CSS 404s or JS errors
-  - [ ] 3.3 Verify CSS is loaded (design tokens applied, not unstyled)
-  - [ ] 3.4 Test dark mode: toggle OS preference → site theme changes
-  - [ ] 3.5 Check no broken images (site-logo.svg, favicon)
+- [x] Task 3: Verify deployed site (AC: #3, #4, #6) **MANUAL — requires live site**
+  - [x] 3.1 Check deployed URL loads without errors
+  - [x] 3.2 Open DevTools → Console → no CSS 404s or JS errors (browser-integration.js message is browser extension, not site)
+  - [x] 3.3 Verify CSS is loaded (design tokens applied, not unstyled)
+  - [x] 3.4 Test dark mode: toggle OS preference → site theme changes
+  - [x] 3.5 Check no broken images (site-logo.svg, favicon)
 
-- [ ] Task 4: Verify auto-deploy pipeline (AC: #5) **MANUAL — requires live site**
-  - [ ] 4.1 Make a trivial commit to `main` (e.g., add comment to hugo.yaml)
-  - [ ] 4.2 Push to `main`
-  - [ ] 4.3 Verify Netlify triggers automatic rebuild
-  - [ ] 4.4 Verify updated site is live after rebuild
+- [x] Task 4: Verify auto-deploy pipeline (AC: #5) **MANUAL — requires live site**
+  - [x] 4.1 Make a trivial commit to `main` (e.g., add comment to hugo.yaml)
+  - [x] 4.2 Push to `main`
+  - [x] 4.3 Verify Netlify triggers automatic rebuild
+  - [x] 4.4 Verify updated site is live after rebuild
 
 - [ ] Task 5: Tag milestone (AC: #7) **After deployment verified**
   - [ ] 5.1 Tag `v0.1.0-phase0-foundation` on `main` after successful deployment
