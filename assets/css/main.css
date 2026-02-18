@@ -121,9 +121,16 @@ img[loading="lazy"] {
     /* Custom classes */
     "prose-2xl";
 
-  /* ── Design token semantic mappings ────────────────────── */
+  /* ── Font family mappings (DESIGN-SPEC §2 "The Archivist") ─
+     Explicit stacks so Tailwind @theme owns the token values
+     instead of fragile self-referential var() lookups.        */
+  --font-heading: 'Literata', Georgia, 'Times New Roman', serif;
+  --font-body: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Commit Mono', 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* ── Design token semantic colors ─────────────────────── */
   /* Map design tokens (from assets/css/design-tokens.css)    */
-  /* to Tailwind-compatible color names.                      */
+  /* to Tailwind-compatible utility names (bg-*, text-*, etc) */
   /* Epic 2+ templates use these: bg-pattern, text-fresh, etc */
   --color-pattern: var(--pattern);
   --color-convergence: var(--convergence);
@@ -131,6 +138,16 @@ img[loading="lazy"] {
   --color-temporal: var(--temporal);
   --color-frontier: var(--frontier);
   --color-pearl: var(--pearl);
+
+  /* ── Surface & text tokens ────────────────────────────── */
+  /* Enables bg-surface, text-text-primary, border-border etc */
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border: var(--border);
+  --color-border-subtle: var(--border-subtle);
 
   /* ── TailBliss legacy colors (backward compatibility) ──── */
   /* Retained intentionally: existing templates still use     */

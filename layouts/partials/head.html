@@ -10,6 +10,12 @@
 <meta name="theme-color" content="#ffffff">
 {{ partial "meta" . }}
 
+{{/* Google Fonts preconnect for performance (Story 2.1) */}}
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+{{/* Google Fonts: Literata (heading), Hanken Grotesk (body), Commit Mono (mono) — DESIGN-SPEC §2 */}}
+<link href="https://fonts.googleapis.com/css2?family=Commit+Mono:wght@400;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,700&display=swap" rel="stylesheet">
+
 {{/* DNS prefetch and preconnect for external resources */}}
 <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
 <link href="https://cdn.jsdelivr.net" rel="preconnect" crossorigin="anonymous">
