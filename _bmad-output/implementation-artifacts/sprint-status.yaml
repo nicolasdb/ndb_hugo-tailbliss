@@ -50,11 +50,11 @@ development_status:
   epic-1-retrospective: done
 
   # Epic 2: Portfolio Shell & Navigation
-  epic-2: backlog
-  2-1-update-base-layout-typography: backlog
-  2-2-redesign-navigation: backlog
-  2-3-build-homepage-hero-content-structure: backlog
-  2-4-redesign-footer: backlog
+  epic-2: in-progress
+  2-1-update-base-layout-typography: ready-for-dev
+  2-2-redesign-navigation: ready-for-dev
+  2-3-build-homepage-hero-content-structure: ready-for-dev
+  2-4-redesign-footer: ready-for-dev
   epic-2-retrospective: optional
 
   # Epic 3: Pearl-Backed Content Publishing
